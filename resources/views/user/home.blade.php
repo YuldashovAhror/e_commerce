@@ -8,8 +8,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
 
-    <title>Sixteen Clothing HTML Template</title>
+    <title>Online Shop</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -23,7 +24,7 @@ https://templatemo.com/tm-546-sixteen-clothing
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-sixteen.css">
+    <link rel="stylesheet" href="assets/css/templatemo-sixteen.css"> 
     <link rel="stylesheet" href="assets/css/owl.css">
 
   </head>
@@ -31,13 +32,13 @@ https://templatemo.com/tm-546-sixteen-clothing
   <body>
 
     <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
+    {{-- <div id="preloader">
         <div class="jumper">
             <div></div>
             <div></div>
             <div></div>
         </div>
-    </div>  
+    </div>   --}}
     <!-- ***** Preloader End ***** -->
 
     <!-- Header -->
@@ -68,18 +69,27 @@ https://templatemo.com/tm-546-sixteen-clothing
                 <li class="nav-item">
                     @if (Route::has('login'))
                         
-                        @auth
-                        <x-app-layout>
-  
-                        </x-app-layout>
-                        
-                        @else
-                        <li><a class="nav-link" href="{{ route('login') }}" >Login</a></li>
+                      @auth
 
-                        @if (Route::has('register'))
-                        <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
-                        @endif
-                    @endauth
+                        <li class="nav-item">
+                          
+                          <a href="{{route('showcart')}}" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            Cart [{{$count}}]
+                          </a> 
+
+                        </li>
+                          <x-app-layout>
+    
+                          </x-app-layout>
+                          
+                          @else
+                            <li><a class="nav-link" href="{{ route('login') }}" >Login</a></li>
+
+                          @if (Route::has('register'))
+                            <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                          @endif
+                      @endauth
                     
                   @endif
                 </li>
@@ -87,7 +97,22 @@ https://templatemo.com/tm-546-sixteen-clothing
           </div>
         </div>
       </nav>
+
+      @if(session()->has('message'))
+        <div class="alert alert-success">
+
+        <button type="button" class="close" data-dismiss="alert">x</button>
+
+        {{session()->get('message')}}
+
+        </div>
+
+      @endif
+
+
     </header>
+
+   
 
     <!-- Page Content -->
     <!-- Banner Starts Here -->

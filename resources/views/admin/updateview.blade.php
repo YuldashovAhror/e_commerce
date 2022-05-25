@@ -6,20 +6,9 @@
 <html lang="en">
 <head>
 
-    @include('admin.css')
-    <style type="text/css">
-        .title
-        {
-            font-size: 25px;
-            color:white;
-        }
+    <base href="/public">
 
-        .label
-        {
-            display:inline-block;
-            width: 200px;
-        }
-    </style>
+    @include('admin.css')
 </head>
 <body>
     @include('admin.saidebar')
@@ -38,30 +27,36 @@
         </div>
 
         @endif
-        <form action="{{route('uploadproduct')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('updateproduct',$data->id)}}" method="POST" enctype="multipart/form-data">
             @csrf 
             <div style="padding: 15px;">
                 <label for="">Product title</label>
-                <input style="color: black" type="text" name="title" placeholder="Give a product title" required>
+                <input style="color: black" type="text" name="title" placeholder="Give a product title" required value="{{$data->title}}">
             </div>
             
             <div style="padding: 15px;">
                 <label for="">Price</label>
-                <input style="color: black" type="number" name="price" placeholder="Give a price" required>
+                <input style="color: black" type="number" name="price" placeholder="Give a price" required value="{{$data->price}}">
             </div>
             
             <div style="padding: 15px;">
                 <label for="">Discription</label>
-                <input style="color: black" type="text" name="des" placeholder="Give a product description" required>
+                <input style="color: black" type="text" name="des" placeholder="Give a product description" required value="{{$data->description}}">
             </div>
             
             <div style="padding: 15px;">
                 <label for="">Quantity</label>
-                <input style="color: black" type="text" name="quantity" placeholder="Product Quantity" required>
+                <input style="color: black" type="text" name="quantity" placeholder="Product Quantity" required value="{{$data->quantity}}">
+            </div>
+
+            <div style="padding: 15px">
+                <label for="">Old Image</label>
+                <img height="150" width="150" src="/productimage/{{$data->image}}" alt="">
+
             </div>
             
             <div style="padding:15px">
-                
+                <label for="">Change the image</label>
                 <input type="file" name="file">
             </div>
             
@@ -73,6 +68,7 @@
         </form>    
         </div>
     </div>
+    {{-- @include('admin.body')     --}}
     @include('admin.script')
 </body>
 </html>
